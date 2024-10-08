@@ -1,0 +1,16 @@
+{
+    "preset": "ts-jest",
+    "testEnvironment": "node",
+    "roots": ["tests/unit"],
+    "testMatch": ["**/*.spec.ts"],
+    "reporters": [
+        "default",
+        ["./node_modules/jest-html-reporter", {
+            "pageTitle": "Test Report",
+            "outputPath": "./test-results/test-report.html"
+        }]
+    ],
+    "collectCoverage": true,
+    "coverageReporters": ["html", "json"],
+    "coverageDirectory": "./test-results/coverage"
+}

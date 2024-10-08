@@ -1,0 +1,6 @@
+lib/
+node_modules/
+test-results/
+playwright-report/
+tsconfig.json
+tsup.config.ts
