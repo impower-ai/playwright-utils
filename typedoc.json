@@ -3,9 +3,14 @@
     "out": "docs",
     "exclude": ["**/node_modules/**"],
     "theme": "default",
-    "name": "Playwright Testing Core",
+    "name": "Playwright Testing Core Library",
     "readme": "none",
     "excludePrivate": true,
     "excludeProtected": true,
-    "excludeExternals": true
+    "excludeExternals": true,
+    "disableSources": true,
+    "categorizeByGroup": true,
+    "categoryOrder": ["Core", "Types", "Hooks", "Utils", "*"],
+    "groupOrder": ["Namespaces", "Classes", "Interfaces", "Functions", "Variables", "*"],
+    "sort": ["static-first", "alphabetical"]
   }
