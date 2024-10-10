@@ -6,28 +6,44 @@ export type {
     TestRunnerFunction,
     PreparedTestArgs,
     TestData
-} from "./test.types";
+} from "./types.test";
 
 // Page
 export type {
     PageObject,
     RoutablePage
-} from "./page.types";
+} from "./types.page";
 
 // Component
 export type {
     DataComponent,
     HydratableComponent
-} from "./component.types";
-
-// Config
-export type {
-    TestConfigWServerPID,
-    FullConfigWServerPID
-} from "./config.types";
+} from "./types.component";
 
 // Timing
 export type {
     ConditionFunc,
     TimingOptions
-} from "./timing.types";
+} from "./types.timing";
+
+// Config
+export type {
+    TestConfigWServerPID,
+    FullConfigWServerPID
+} from "./types.config";
+
+// Target
+export type {
+
+} from "./types.target";
+
+// Credential
+export type {
+    Credentials,
+    UserPassCredentials
+} from "./types.credential";
+
+// Environment
+export type {
+
+} from "./types.environment";

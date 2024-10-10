@@ -1,5 +1,5 @@
-import { ConditionError, TimeoutElapsedError } from "../core/error";
-import { ConditionFunc, TimingOptions } from "../types/timing.types";
+import { ConditionError, TimeoutElapsedError } from "../Error";
+import { ConditionFunc, TimingOptions } from "../types/types.timing";
 import { Page, Locator, expect } from "@playwright/test";
 
 /**

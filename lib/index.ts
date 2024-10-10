@@ -21,10 +21,10 @@
  */
 
 /**
- * Core module containing base classes for page objects and components.
+ * Base module containing base classes for pages and components.
  * @namespace
  */
-export * from "./core";
+export * from "./base";
 
 /**
  * Types module containing TypeScript interfaces for type safety.
@@ -43,3 +43,7 @@ export * as Hooks from "./hooks";
  * @namespace
  */
 export * as Utils from "./utils";
+
+export { default as Test } from "./Test";
+export { default as TestCase } from "./TestCase";
+export * from "./Error";

@@ -1,8 +1,8 @@
 /**
  * @module Utils
  */
-export * as Timing from "./timing";
-export * as Enum from "./enum";
-export * as Tag from "./tag";
-export * as Validate from "./validate";
-export * as Random from "./random";
+export * as Timing from "./utils.timing";
+export * as Enum from "./utils.enum";
+export * as Tag from "./utils.tag";
+export * as Validate from "./utils.validate";
+export * as Random from "./utils.random";
