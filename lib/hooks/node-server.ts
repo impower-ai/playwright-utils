@@ -1,6 +1,14 @@
 import { spawn } from "child_process";
-import { FullConfigWServerPID } from "../core/config.types";
+import { FullConfigWServerPID } from "../types/config.types";
 
+/**
+ * Sets up the test environment by starting a local node server.
+ * @async
+ * @param {FullConfigWServerPID} config - The configuration object that will store the server PID.
+ * @param {string} nodeServerPath - The path to the node server script.
+ * @returns {Promise<void>} A promise that resolves when the setup is complete.
+ * @throws {Error} If the server fails to start.
+ */
 export async function setup(config: FullConfigWServerPID, nodeServerPath: string): Promise<void> {
     try {
         console.log("Starting local node server...");
@@ -16,6 +24,13 @@ export async function setup(config: FullConfigWServerPID, nodeServerPath: string
     }
 }
 
+/**
+ * Tears down the test environment by closing the local node server.
+ * @async
+ * @param {FullConfigWServerPID} config - The configuration object containing the server PID.
+ * @returns {Promise<void>} A promise that resolves when the teardown is complete.
+ * @throws {Error} If the server fails to close.
+ */
 export async function teardown(config: FullConfigWServerPID): Promise<void> {
     try {
         console.log("Closing local node server...");

@@ -6,7 +6,7 @@ import {
     PlaywrightWorkerOptions,
     Page
 } from "@playwright/test";
-import { TestCase } from "./test";
+import { TestCase } from "../core/test";
 
 export type TestFunctionArgs = PlaywrightTestArgs & PlaywrightTestOptions & PlaywrightWorkerArgs & PlaywrightWorkerOptions;
 

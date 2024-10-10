@@ -1,5 +1,5 @@
-import { ConditionError, TimeoutElapsedError } from "../../core/error";
-import { ConditionFunc, TimingOptions } from "./timing.types";
+import { ConditionError, TimeoutElapsedError } from "../core/error";
+import { ConditionFunc, TimingOptions } from "../types/timing.types";
 import { Page, Locator, expect } from "@playwright/test";
 
 /**
@@ -15,7 +15,6 @@ export const DefaultTimingOptions: TimingOptions = {
 
 /**
  * Creates a Promise that rejects after a specified timeout.
- * 
  * @param {number} timeout - The timeout duration in milliseconds.
  * @returns {Promise<never>} A Promise that rejects with a TimeoutElapsedError after the specified timeout.
  */
@@ -24,7 +23,6 @@ export const createTimeoutPromise = (timeout: number): Promise<never> =>
 
 /**
  * Wraps a condition function to safely execute it and return a boolean result.
- * 
  * @param {ConditionFunc} condition - The condition function to execute.
  * @returns {Promise<boolean>} A Promise that resolves to true if the condition is met, false otherwise.
  */
@@ -38,7 +36,6 @@ export const createSafeCondition = async (condition: ConditionFunc): Promise<boo
 
 /**
  * Creates a delay for a specified duration.
- * 
  * @param {number} timeout - The delay duration in milliseconds.
  * @returns {Promise<void>} A Promise that resolves after the specified delay.
  */
@@ -46,7 +43,6 @@ export const delay = (timeout: number): Promise<void> => new Promise((resolve) =
 
 /**
  * Waits for a condition to be true within a specified timeout.
- * 
  * @param {ConditionFunc} condition - The condition to wait for.
  * @param {Partial<Pick<TimingOptions, 'timeout' | 'pollInterval'>>} [options] - Optional timing parameters.
  * @throws {TimeoutElapsedError} If the condition is not met within the timeout.
@@ -72,7 +68,6 @@ export const waitFor = async (condition: ConditionFunc, options: Partial<Pick<Ti
 
 /**
  * Waits for a value to stabilize (remain unchanged) within a specified timeout.
- * 
  * @template T The type of the value being checked.
  * @param {() => Promise<T>} valueFunc - A function that returns the value to check for stability.
  * @param {Partial<TimingOptions>} [options] - Optional timing parameters.
@@ -102,7 +97,6 @@ export const waitForStableValue = async <T>(valueFunc: () => Promise<T>, options
 
 /**
  * Waits for all specified conditions to be true within a timeout.
- * 
  * @param {ConditionFunc[]} conditions - An array of condition functions to wait for.
  * @param {Partial<TimingOptions>} [options] - Optional timing parameters.
  * @throws {TimeoutElapsedError} If not all conditions are met within the timeout.
@@ -124,7 +118,6 @@ export const waitForAll = async (conditions: ConditionFunc[], options: Partial<T
 
 /**
  * Waits for any of the specified conditions to be true within a timeout.
- * 
  * @param {ConditionFunc[]} conditions - An array of condition functions to wait for.
  * @param {Partial<TimingOptions>} [options] - Optional timing parameters.
  * @throws {TimeoutElapsedError} If none of the conditions are met within the timeout.
@@ -146,7 +139,6 @@ export const waitForAny = async (conditions: ConditionFunc[], options: Partial<T
 
 /**
  * Waits for a URL to match a specified pattern within a timeout.
- * 
  * @param {Page} page - The Playwright Page object to check the URL against.
  * @param {RegExp} urlPattern - The regular expression pattern to match the URL against.
  * @param {Partial<Pick<TimingOptions, 'timeout' | 'pollInterval'>>} [options] - Optional timing parameters.
@@ -165,7 +157,6 @@ export const waitForUrlMatch = async (page: Page, urlPattern: RegExp, options: P
 
 /**
  * Waits for either of two conditions to be true within a timeout.
- * 
  * @param {ConditionFunc} condition1 - The first condition function to wait for.
  * @param {ConditionFunc} condition2 - The second condition function to wait for.
  * @param {Partial<TimingOptions>} [options] - Optional timing parameters.
@@ -184,7 +175,6 @@ export const waitForEither = async (condition1: ConditionFunc, condition2: Condi
 
 /**
  * Waits for an element to appear and then disappear within a timeout.
- * 
  * @param {Locator} locator - The Playwright Locator for the element to wait for.
  * @throws {ConditionError} If the element does not appear and disappear as expected.
  */

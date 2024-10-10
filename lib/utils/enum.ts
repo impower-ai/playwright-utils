@@ -1,7 +1,6 @@
 
 /**
  * Checks if the given enum object is a flag enum.
- * 
  * @param {object} enumObj - The enum object to check.
  * @returns {boolean} True if the enum is a flag enum, false otherwise.
  */
@@ -12,7 +11,6 @@ export function isFlagEnum(enumObj: object): boolean {
 
 /**
  * Validates if a given value is a valid enum value.
- * 
  * @param {any} value - The value to validate.
  * @param {object} enumType - The enum object to validate against.
  * @returns {boolean} True if the value is valid, false otherwise.
@@ -28,7 +26,6 @@ export function isValidEnumValue(value: any, enumType: object): boolean {
 
 /**
  * Gets all values from an enum object.
- * 
  * @param {object} enumObj - The enum object.
  * @returns {(string[]|number[])} An array of enum values.
  */
@@ -40,7 +37,6 @@ export function getEnumValues(enumObj: object): string[] | number[] {
 
 /**
  * Gets a string representation of enum flags.
- * 
  * @param {T} enumObj - The enum object.
  * @param {number} flags - The flags to convert to string.
  * @returns {string} A string representation of the flags.
@@ -59,7 +55,6 @@ export function getEnumString<T extends { [key: string]: string | number }>(enum
 
 /**
  * Validates an enum property in a JSON object.
- * 
  * @param {any} json - The JSON object.
  * @param {string} property - The property name to validate.
  * @param {object} enumType - The enum object to validate against.
@@ -73,7 +68,6 @@ export function validateEnumProperty(json: any, property: string, enumType: obje
 
 /**
  * Checks if a value has a specific flag.
- * 
  * @param {(number|string)} value - The value to check.
  * @param {(number|string)} flag - The flag to check for.
  * @param {object} enumType - The enum object.
@@ -88,7 +82,6 @@ export function hasFlag(value: number | string, flag: number | string, enumType:
 
 /**
  * Adds a flag to a value for a flag enum.
- * 
  * @param {number} value - The original value.
  * @param {number} flag - The flag to add.
  * @param {object} enumType - The enum object.
@@ -104,7 +97,6 @@ export function addFlag(value: number, flag: number, enumType: object): number {
 
 /**
  * Removes a flag from a value for a flag enum.
- * 
  * @param {number} value - The original value.
  * @param {number} flag - The flag to remove.
  * @param {object} enumType - The enum object.
@@ -120,7 +112,6 @@ export function removeFlag(value: number, flag: number, enumType: object): numbe
 
 /**
  * Toggles a flag in a value for a flag enum.
- * 
  * @param {number} value - The original value.
  * @param {number} flag - The flag to toggle.
  * @param {object} enumType - The enum object.
