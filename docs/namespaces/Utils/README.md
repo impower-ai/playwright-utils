@@ -13,6 +13,7 @@ Utils module containing utility functions for timing, enum handling, etc.
 ### Namespaces
 
 - [Enum](namespaces/Enum/README.md)
+- [Random](namespaces/Random/README.md)
 - [Tag](namespaces/Tag/README.md)
 - [Timing](namespaces/Timing/README.md)
 - [Validate](namespaces/Validate/README.md)

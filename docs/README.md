@@ -56,9 +56,11 @@ Timing.waitFor(...);
 ## Type Aliases
 
 - [ConditionFunc](type-aliases/ConditionFunc.md)
+- [Credentials](type-aliases/Credentials.md)
 - [PreparedTestArgs](type-aliases/PreparedTestArgs.md)
 - [TestData](type-aliases/TestData.md)
 - [TestFunction](type-aliases/TestFunction.md)
 - [TestFunctionArgs](type-aliases/TestFunctionArgs.md)
 - [TestRunnerFunction](type-aliases/TestRunnerFunction.md)
 - [TimingOptions](type-aliases/TimingOptions.md)
+- [UserPassCredentials](type-aliases/UserPassCredentials.md)

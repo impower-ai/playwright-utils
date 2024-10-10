@@ -57,9 +57,3 @@
 #### Inherited from
 
 [`PageObject`](PageObject.md).[`waitUntilLoaded`](PageObject.md#waituntilloaded)
-
-## Properties
-
-### path
-
-> `readonly` **path**: `string`
