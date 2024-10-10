@@ -1,12 +1,20 @@
 
-// Core
+/**
+ * @module Core
+ */
 export * from "./core";
 
-// Types
+/**
+ * @module Types
+ */
 export * from "./types";
 
-// Hooks
+/**
+ * @module Hooks
+ */
 export * as Hooks from "./hooks";
 
-// Utils
+/**
+ * @module Utils
+ */
 export * as Utils from "./utils";

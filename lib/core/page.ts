@@ -5,7 +5,6 @@ import { PageObject } from "../types";
  * Represents a base page object that implements the PageObject interface.
  * @abstract
  * @class
- * @implements {PageObject}
  */
 export abstract class BasePageObject implements PageObject {
 

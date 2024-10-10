@@ -1,0 +1,11 @@
+{
+    "entryPoints": ["./lib/index.ts"],
+    "out": "docs",
+    "exclude": ["**/node_modules/**"],
+    "theme": "default",
+    "name": "Playwright Testing Core",
+    "readme": "none",
+    "excludePrivate": true,
+    "excludeProtected": true,
+    "excludeExternals": true
+  }

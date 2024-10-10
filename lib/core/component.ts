@@ -7,7 +7,6 @@ import { BasePageObject } from "./page";
  * Represents a base component for page objects.
  * @abstract
  * @class
- * @extends {BasePageObject}
  */
 export abstract class BaseComponent extends BasePageObject {}
 
@@ -16,11 +15,10 @@ export abstract class BaseComponent extends BasePageObject {}
  * @abstract
  * @class
  * @extends {BaseComponent}
- * @implements {HydratableComponent<T>}
  * @template T
  */
 export abstract class BaseHydratableComponent<T> extends BaseComponent implements HydratableComponent<T>  {
-    
+
     /**
      * The data associated with the component.
      * @public

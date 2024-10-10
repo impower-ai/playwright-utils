@@ -4,6 +4,7 @@
     "noImplicitAny": true,
     "esModuleInterop": true,
     "strictNullChecks": true,
+    "skipLibCheck": true,
     "target": "ES2022",
     "moduleResolution": "Node",
     "module": "CommonJS",
@@ -13,6 +14,6 @@
     "outDir": "dist",
     "lib": ["ES2022"]
   },
-  "include": ["lib"],
-  "exclude": ["node_modules"]
+  "include": ["lib/**/*"],
+  "exclude": ["node_modules", "**/node_modules/*"]
 }

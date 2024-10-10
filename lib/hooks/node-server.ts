@@ -3,7 +3,6 @@ import { FullConfigWServerPID } from "../types/config.types";
 
 /**
  * Sets up the test environment by starting a local node server.
- * @async
  * @param {FullConfigWServerPID} config - The configuration object that will store the server PID.
  * @param {string} nodeServerPath - The path to the node server script.
  * @returns {Promise<void>} A promise that resolves when the setup is complete.
@@ -26,7 +25,6 @@ export async function setup(config: FullConfigWServerPID, nodeServerPath: string
 
 /**
  * Tears down the test environment by closing the local node server.
- * @async
  * @param {FullConfigWServerPID} config - The configuration object containing the server PID.
  * @returns {Promise<void>} A promise that resolves when the teardown is complete.
  * @throws {Error} If the server fails to close.

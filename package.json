@@ -1,16 +1,25 @@
 {
   "name": "playwright-testing-core",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",
   "types": "./dist/index.d.ts",
   "scripts": {
-    "clean": "rimraf dist",
-    "build": "npx tsup",
-    "test": "npm run test:clean && npm run test:unit",
-    "test:clean": "rimraf test-results",
+    
+    "build": "npm run build:js && npm run build:docs",
+    "build:js": "npm run clean:js && npx tsup",
+    "build:docs": "npm run clean:docs && npx typedoc",
+    
+    "clean": "npm run clean:js && npm run clean:reports",
+    "clean:js": "npx rimraf dist",
+    "clean:docs": "npx rimraf docs",
+    "clean:reports": "npx rimraf test-results",
+    
+    "test": "npm run clean:reports && npm run test:unit",
     "test:unit": "npx jest --config=jest.config.json",
-    "prepare": "npm run build"
+    
+    "prepare": "npm run clean && npm run build:js"
+
   },
   "keywords": [
     "playwright",
@@ -30,6 +39,7 @@
     "rimraf": "^6.0.1",
     "ts-jest": "^29.2.5",
     "tsup": "^8.3.0",
+    "typedoc": "^0.26.8",
     "typescript": "^5.6.2"
   },
   "dependencies": {
