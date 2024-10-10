@@ -11,13 +11,10 @@ export {
     ConditionError
 } from "./error";
 
-// Page
-export {
-    BasePageObject
-} from "./page";
-
-// Component
+// Base
+export { BaseObject } from "./base.object";
+export { BasePage } from "./base.page";
 export {
     BaseComponent,
     BaseHydratableComponent
-} from "./component";
+} from "./base.component";

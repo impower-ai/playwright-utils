@@ -1,14 +1,14 @@
 import { Page } from "@playwright/test";
 import { Timing } from "../utils";
 import { HydratableComponent } from "../types";
-import { BasePageObject } from "./page";
+import { BaseObject } from "./base.object";
 
 /**
  * Represents a base component for page objects.
  * @abstract
  * @class
  */
-export abstract class BaseComponent extends BasePageObject {}
+export abstract class BaseComponent extends BaseObject {}
 
 /**
  * Represents a base hydratable component.
