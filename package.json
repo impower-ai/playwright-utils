@@ -5,21 +5,16 @@
   "module": "./dist/index.mjs",
   "types": "./dist/index.d.ts",
   "scripts": {
-    
     "build": "npm run build:js && npm run build:docs",
     "build:js": "npm run clean:js && npx tsup",
     "build:docs": "npm run clean:docs && npx typedoc",
-    
     "clean": "npm run clean:js && npm run clean:reports",
     "clean:js": "npx rimraf dist",
     "clean:docs": "npx rimraf docs",
     "clean:reports": "npx rimraf test-results",
-    
     "test": "npm run clean:reports && npm run test:unit",
     "test:unit": "npx jest --config=jest.config.json",
-    
     "prepare": "npm run clean && npm run build:js"
-
   },
   "keywords": [
     "playwright",
@@ -40,6 +35,7 @@
     "ts-jest": "^29.2.5",
     "tsup": "^8.3.0",
     "typedoc": "^0.26.8",
+    "typedoc-plugin-markdown": "^4.2.9",
     "typescript": "^5.6.2"
   },
   "dependencies": {

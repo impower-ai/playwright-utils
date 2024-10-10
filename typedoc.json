@@ -2,6 +2,7 @@
     "entryPoints": ["./lib/index.ts"],
     "out": "docs",
     "exclude": ["**/node_modules/**"],
+    "plugin": ["typedoc-plugin-markdown"],
     "theme": "default",
     "name": "Playwright Testing Core Library",
     "readme": "none",
