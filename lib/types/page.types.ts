@@ -5,7 +5,6 @@ export interface PageObject {
 }
 
 export interface RoutablePage extends PageObject {
-    readonly path: string;
     navigate(): Promise<void>;
     isCurrentPage(): Promise<void>;
 }
