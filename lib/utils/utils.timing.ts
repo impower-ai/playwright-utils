@@ -1,6 +1,15 @@
 import { ConditionError, TimeoutElapsedError } from "../Error";
-import { ConditionFunc, TimingOptions } from "../types/types.timing";
 import { Page, Locator, expect } from "@playwright/test";
+
+export type ConditionFunc = () => Promise<boolean>;
+
+export type TimingOptions = {
+    timeout: number;
+    timeoutShort: number;
+    timeoutMedium: number;
+    timeoutLong: number;
+    pollInterval: number;
+}
 
 /**
  * Default timing options used across the utility functions.

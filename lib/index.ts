@@ -33,6 +33,12 @@ export * from "./base";
 export * from "./types";
 
 /**
+ * Types module containing TypeScript interfaces for type safety.
+ * @namespace
+ */
+export * from "./test";
+
+/**
  * Hooks module containing reusable hooks for common testing scenarios.
  * @namespace
  */
@@ -44,6 +50,4 @@ export * as Hooks from "./hooks";
  */
 export * as Utils from "./utils";
 
-export { default as Test } from "./Test";
-export { default as TestCase } from "./TestCase";
 export * from "./Error";

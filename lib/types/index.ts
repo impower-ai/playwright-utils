@@ -1,13 +1,4 @@
 
-// Test
-export type {
-    TestFunctionArgs,
-    TestFunction,
-    TestRunnerFunction,
-    PreparedTestArgs,
-    TestData
-} from "./types.test";
-
 // Page
 export type {
     PageObject,
@@ -19,12 +10,6 @@ export type {
     DataComponent,
     HydratableComponent
 } from "./types.component";
-
-// Timing
-export type {
-    ConditionFunc,
-    TimingOptions
-} from "./types.timing";
 
 // Config
 export type {
@@ -42,8 +27,3 @@ export type {
     Credentials,
     UserPassCredentials
 } from "./types.credential";
-
-// Environment
-export type {
-
-} from "./types.environment";

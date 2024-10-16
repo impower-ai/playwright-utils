@@ -1,0 +1,25 @@
+
+Data Driven Design
+
+Test Function - Performs pre-test setup, instantiates and then initializes TestCase, prepares Test Runner Function
+Test Runner Function - The actual test function, defines playwright logic
+
+class Test
+- Constructor params
+  - Test Runner Function
+  - Array of test cases
+  - Array of rules to validate test case
+- Implements builder pattern
+- Ability to add hooks
+  - Before all
+  - Before each
+- Defines static method to prepare Test Function (Test.prepare() will return a prepared Test Runner function) ??
+- Defines a method for running the tests (Leverages built in playwright features)
+  - Can control parallel / serial testing
+  - Concurrency limiting
+
+class TestCase<T>
+- Defines a single test case
+- T defines the structure of the actual test data
+- Performs type validation on class variables
+- ability to add before / after hooks for individual test case
