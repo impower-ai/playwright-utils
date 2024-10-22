@@ -12,7 +12,7 @@
 
 • **page**: `Page`
 
-• **testInfo**: `TestInfo`
+• **testInfo**: [`TestInfo`](../interfaces/TestInfo.md)
 
 • **testCase**: [`TestCase`](../classes/TestCase.md)\<`any`\>
 

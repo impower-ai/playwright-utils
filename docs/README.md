@@ -4,34 +4,12 @@
 
 # Playwright Testing Core Library
 
-This module provides utilities for Playwright testing, supporting both namespace and individual imports.
-
-## Remarks
-
-The library is organized into several modules:
-- Core: Base classes for page objects and components
-- Types: TypeScript interfaces for type safety
-- Hooks: Reusable hooks for common testing scenarios
-- Utils: Utility functions for timing, enum handling, etc.
-
-## Examples
-
-```ts
-// Namespace import
-import { Utils } from "playwright-testing-core";
-Utils.Timing.waitFor(...);
-```
-
-```ts
-// Individual import
-import { Timing } from "playwright-testing-core";
-Timing.waitFor(...);
-```
+A comprehensive testing utility framework built on top of Playwright.
+Provides utilities for building maintainable, data-driven test suites.
 
 ## Namespaces
 
-- [Hooks](namespaces/Hooks/README.md)
-- [Utils](namespaces/Utils/README.md)
+- [NodeServer](namespaces/NodeServer/README.md)
 
 ## Classes
 
@@ -40,8 +18,12 @@ Timing.waitFor(...);
 - [BaseObject](classes/BaseObject.md)
 - [BasePage](classes/BasePage.md)
 - [ConditionError](classes/ConditionError.md)
-- [Test](classes/Test.md)
+- [Rule](classes/Rule.md)
+- [RuleEngine](classes/RuleEngine.md)
+- [TestBuilder](classes/TestBuilder.md)
 - [TestCase](classes/TestCase.md)
+- [TestHook](classes/TestHook.md)
+- [TestOrchestrator](classes/TestOrchestrator.md)
 - [TimeoutElapsedError](classes/TimeoutElapsedError.md)
 
 ## Interfaces
@@ -51,16 +33,43 @@ Timing.waitFor(...);
 - [HydratableComponent](interfaces/HydratableComponent.md)
 - [PageObject](interfaces/PageObject.md)
 - [RoutablePage](interfaces/RoutablePage.md)
+- [RuleDefinition](interfaces/RuleDefinition.md)
+- [TestCaseDefinition](interfaces/TestCaseDefinition.md)
+- [TestConfig](interfaces/TestConfig.md)
 - [TestConfigWServerPID](interfaces/TestConfigWServerPID.md)
+- [TestInfo](interfaces/TestInfo.md)
+
+## Functions
+
+- [Test](functions/Test.md)
+
+## Variables
+
+- [default](variables/default.md)
+- [Enum](variables/Enum.md)
+- [Hooks](variables/Hooks.md)
+- [Random](variables/Random.md)
+- [Tag](variables/Tag.md)
+- [TestConfigDefault](variables/TestConfigDefault.md)
+- [Testing](variables/Testing.md)
+- [Timing](variables/Timing.md)
+- [Utils](variables/Utils.md)
+- [Validate](variables/Validate.md)
+
+## Enumerations
+
+- [TestCaseValidationErrorTypes](enumerations/TestCaseValidationErrorTypes.md)
+- [TestHookTypes](enumerations/TestHookTypes.md)
 
 ## Type Aliases
 
 - [ConditionFunc](type-aliases/ConditionFunc.md)
-- [Credentials](type-aliases/Credentials.md)
 - [PreparedTestArgs](type-aliases/PreparedTestArgs.md)
-- [TestData](type-aliases/TestData.md)
+- [RuleCallback](type-aliases/RuleCallback.md)
+- [TestCaseCallback](type-aliases/TestCaseCallback.md)
+- [TestCaseValidationError](type-aliases/TestCaseValidationError.md)
 - [TestFunction](type-aliases/TestFunction.md)
 - [TestFunctionArgs](type-aliases/TestFunctionArgs.md)
+- [TestHookCallback](type-aliases/TestHookCallback.md)
 - [TestRunnerFunction](type-aliases/TestRunnerFunction.md)
 - [TimingOptions](type-aliases/TimingOptions.md)
-- [UserPassCredentials](type-aliases/UserPassCredentials.md)

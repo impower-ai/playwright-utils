@@ -8,8 +8,6 @@
 
 > **ConditionFunc**: () => `Promise`\<`boolean`\>
 
-Type for a condition function that returns a promise resolving to a boolean.
-
 ## Returns
 
 `Promise`\<`boolean`\>

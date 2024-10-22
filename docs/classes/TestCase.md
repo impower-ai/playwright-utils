@@ -6,23 +6,19 @@
 
 # Class: TestCase\<T\>
 
-Represents a test case with associated data and setup.
-
 ## Type Parameters
 
 • **T**
-
-The type of the test data.
 
 ## Constructors
 
 ### new TestCase()
 
-> **new TestCase**\<`T`\>(`data`): [`TestCase`](TestCase.md)\<`T`\>
+> **new TestCase**\<`T`\>(`definition`): [`TestCase`](TestCase.md)\<`T`\>
 
 #### Parameters
 
-• **data**: [`TestData`](../type-aliases/TestData.md)\<`T`\>
+• **definition**: [`TestCaseDefinition`](../interfaces/TestCaseDefinition.md)\<`T`\>
 
 #### Returns
 
@@ -30,17 +26,33 @@ The type of the test data.
 
 ## Methods
 
-### init()
+### setup()
 
-> **init**(): `Promise`\<`void`\>
-
-Initializes the test case by running the setup function if provided.
+> **setup**(): `Promise`\<`void`\>
 
 #### Returns
 
 `Promise`\<`void`\>
 
-A promise that resolves when initialization is complete.
+***
+
+### teardown()
+
+> **teardown**(): `Promise`\<`void`\>
+
+#### Returns
+
+`Promise`\<`void`\>
+
+***
+
+### validateTypes()
+
+> **validateTypes**(): [`TestCaseValidationError`](../type-aliases/TestCaseValidationError.md)[]
+
+#### Returns
+
+[`TestCaseValidationError`](../type-aliases/TestCaseValidationError.md)[]
 
 ## Properties
 
@@ -59,3 +71,9 @@ A promise that resolves when initialization is complete.
 ### name
 
 > `readonly` **name**: `string`
+
+***
+
+### schema
+
+> `readonly` **schema**: `ZodObject`\<`ZodRawShape`, `UnknownKeysParam`, `ZodTypeAny`, `object`, `object`\>

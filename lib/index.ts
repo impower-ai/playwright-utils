@@ -7,7 +7,6 @@
 import { Utils } from './utils';
 import { Hooks } from './hooks';
 import { Testing } from './test';
-import { Types } from './types';
 
 // Core - Base classes and interfaces
 export * from './core';
@@ -31,14 +30,12 @@ export * from './errors';
 export {
     Utils,
     Hooks,
-    Testing,
-    Types
+    Testing
 };
 
 // Default export of all namespaces
 export default {
     Utils,
     Hooks,
-    Testing,
-    Types
+    Testing
 } as const;

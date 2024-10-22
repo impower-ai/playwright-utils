@@ -1,6 +1,6 @@
 import { Page } from "@playwright/test";
 import { Timing } from "../utils";
-import { HydratableComponent } from "../types";
+import { HydratableComponent } from "./types";
 import { BaseObject } from "./base.object";
 
 /**

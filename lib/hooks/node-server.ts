@@ -1,5 +1,5 @@
 import { spawn } from "child_process";
-import { FullConfigWServerPID } from "../types/config";
+import { FullConfigWServerPID } from "../types";
 
 /**
  * Sets up the test environment by starting a local node server.

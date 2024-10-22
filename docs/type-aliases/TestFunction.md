@@ -12,7 +12,7 @@
 
 • **args**: [`TestFunctionArgs`](TestFunctionArgs.md)
 
-• **testInfo**: `TestInfo`
+• **testInfo**: [`TestInfo`](../interfaces/TestInfo.md)
 
 ## Returns
 

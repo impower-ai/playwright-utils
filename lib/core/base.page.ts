@@ -1,5 +1,5 @@
 import { Page } from "@playwright/test";
-import { PageObject } from "../types";
+import { PageObject } from "./types";
 import { BaseObject } from "./base.object";
 
 /**
