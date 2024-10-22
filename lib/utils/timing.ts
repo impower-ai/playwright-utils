@@ -1,6 +1,15 @@
-import { ConditionError, TimeoutElapsedError } from "../Error";
-import { ConditionFunc, TimingOptions } from "../types/types.timing";
+import { ConditionError, TimeoutElapsedError } from "../errors";
 import { Page, Locator, expect } from "@playwright/test";
+
+export type ConditionFunc = () => Promise<boolean>;
+
+export type TimingOptions = {
+    timeout: number;
+    timeoutShort: number;
+    timeoutMedium: number;
+    timeoutLong: number;
+    pollInterval: number;
+}
 
 /**
  * Default timing options used across the utility functions.
@@ -187,3 +196,18 @@ export const waitToAppearAndDisappear = async (locator: Locator): Promise<void> 
         throw new ConditionError(`Element did not appear and disappear as expected: ${errorMessage}`);
     }
 };
+
+export const Timing = {
+    createTimeoutPromise,
+    createSafeCondition,
+    delay,
+    waitFor,
+    waitForStableValue,
+    waitForAll,
+    waitForAny,
+    waitForUrlMatch,
+    waitForEither,
+    waitToAppearAndDisappear
+} as const;
+
+export default Timing;

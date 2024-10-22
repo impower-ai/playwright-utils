@@ -1,49 +1,17 @@
+/**
+ * @module Types
+ * Common type definitions used across the testing framework.
+ */
 
-// Test
-export type {
-    TestFunctionArgs,
-    TestFunction,
-    TestRunnerFunction,
-    PreparedTestArgs,
-    TestData
-} from "./types.test";
-
-// Page
-export type {
-    PageObject,
-    RoutablePage
-} from "./types.page";
-
-// Component
-export type {
-    DataComponent,
-    HydratableComponent
-} from "./types.component";
-
-// Timing
-export type {
-    ConditionFunc,
-    TimingOptions
-} from "./types.timing";
-
-// Config
 export type {
     TestConfigWServerPID,
     FullConfigWServerPID
-} from "./types.config";
+} from './config';
 
-// Target
-export type {
+import * as Config from './config';
 
-} from "./types.target";
+export const Types = {
+    Config
+} as const;
 
-// Credential
-export type {
-    Credentials,
-    UserPassCredentials
-} from "./types.credential";
-
-// Environment
-export type {
-
-} from "./types.environment";
+export default Types;
