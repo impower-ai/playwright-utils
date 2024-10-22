@@ -136,3 +136,18 @@ export function toggleFlag(value: number, flag: number, enumType: object): numbe
     else
         throw new Error("Attempted to toggle flag on non-flags enum");
 }
+
+export const Enum = {
+    isFlag,
+    isValid,
+    getValue,
+    getValues,
+    getFlagString,
+    isValidProperty,
+    hasFlag,
+    addFlag,
+    removeFlag,
+    toggleFlag
+} as const;
+
+export default Enum;

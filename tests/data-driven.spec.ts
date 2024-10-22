@@ -1,16 +1,15 @@
-import { Page, TestInfo, test } from "@playwright/test";
-import { DataDrivenTestBuilder, TestCase, Utils } from "../lib";
+import { Page } from "@playwright/test";
 import { z } from "zod";
-import { TestCaseDefinition } from "../lib/test/test.case";
-import { TestRuleCallback } from "../lib/test/test.rule";
-
-// Helper method
-
-async function fetchPokemon(pokemon: string) {
-    const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${pokemon}`);
-    if (!response.ok) throw new Error("Failed to prepare async data.");
-    return await response.json();
-}
+import {
+    Test,
+    TestInfo,
+    TestOrchestrator,
+    TestBuilder,
+    TestCase,
+    Utils,
+    TestCaseDefinition,
+} from "../lib";
+import { RuleDefinition } from "../lib/test/types";
 
 // Define Pokemon Schema
 
@@ -23,88 +22,95 @@ const PokemonSchema = z.object({
 
 type PokemonData = z.infer<typeof PokemonSchema>;
 
-// Define custom test class
+// Define callback for test case setup
 
-class PokemonTestCase extends TestCase<PokemonData> {
+const setupCallback = async (id: string, data: Partial<PokemonData>) => {
+    console.log(`[${id}] Setup.`);
+    const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${data.name!}`);
+    if (!response.ok) throw new Error("Failed to prepare async data.");
+    const pokemon = await response.json();
+    data.baseExperience = pokemon["base_experience"];
+    data.abilities = pokemon["abilities"];
+    data.forms = pokemon["forms"];
+}
 
-    public async setup(data: Partial<PokemonData>): Promise<void> {
-        const pokemon = await fetchPokemon(data.name!);
-        data.baseExperience = pokemon["base_experience"];
-        data.abilities = pokemon["abilities"];
-        data.forms = pokemon["forms"];
-    }
-    
-    public async teardown(): Promise<void> {
-        // Perform asynchronous teardown here
-    }
+const teardownCallback = async (id: string, data: Partial<PokemonData>) => {
+    console.log(`[${id}] Teardown.`);
 }
 
 // Define Test Cases
 
-const testCase1 = new PokemonTestCase({
-	name: "Test Case #1",
-	data: {
-		name: "pikachu"
-	}
-});
+const testCase1: TestCaseDefinition<PokemonData> = {
+    schema: PokemonSchema,
+    name: "Test Case #1",
+    data: {
+        name: "pikachu"
+    }
+}
 
-const testCase2 = new PokemonTestCase({
-	name: "Test Case #2",
-	data: {
-		name: "ditto"
-	}
-});
+const testCase2: TestCaseDefinition<PokemonData> = {
+    schema: PokemonSchema,
+    name: "Test Case #2",
+    data: {
+        name: "ditto"
+    }
+};
+
+const testCase3: TestCaseDefinition<PokemonData> = {
+    schema: PokemonSchema,
+    name: "Test Case #3",
+    data: {
+        name: "bulbasaur"
+    }
+};
 
 // Define default rules
 
-const defaultRules: { name: string, check: TestRuleCallback<PokemonData> }[] = [
+enum Rules {
+    PokemonBaseExperienceMustBeGreaterThan100,
+    PokemonMustNotBeBulbasaur
+}
+
+const defaultRules: RuleDefinition<PokemonData>[] = [
 	{
+        id: Rules.PokemonBaseExperienceMustBeGreaterThan100,
 		name: "Pokemon base experience must be at least 100",
 		check: (data: Partial<PokemonData>) => {
             if (data.baseExperience! < 100) return false;
 			return true;
 		}
 	},
+    {
+        id: Rules.PokemonMustNotBeBulbasaur,
+        name: "Pokemon must not be bulbasaur",
+        check: (data: Partial<PokemonData>): boolean => {
+            if (data.name && data.name == "bulbasaur") return false;
+            return true;
+        },
+        dependsOn: [
+            Rules.PokemonBaseExperienceMustBeGreaterThan100
+        ]
+    }
 ];
 
 // Define test suite
-
-test.describe("Data Driven Testing", () => {
+Test.describe("Data Driven Testing", () => {
     
-    const dataDrivenTest = new DataDrivenTestBuilder<PokemonData, PokemonTestCase>(PokemonSchema)
-        .addCases([
-            testCase1,
-            testCase2
-        ])
-        .addRules(defaultRules)
-        .addRule({
-            name: "Pokemon must not be bulbasaur",
-            check: (data: Partial<PokemonData>): boolean => {
-                if (data.name && data.name == "bulbasaur") return false;
-                return true;
-            }
-        })
-        .addBeforeAllHook("Custom BeforeAll", async () => {
-            await Utils.Timing.delay(1000);
-        })
-        .addBeforeEachHook("Custom BeforeEach", async () => {
-            await Utils.Timing.delay(250);
-        })
-        .addAfterAllHook("Custom AfterAll", async () => {
-            await Utils.Timing.delay(1000);
-        })
-        .addAfterEachHook("Custom AfterEach", async () => {
-            await Utils.Timing.delay(250);
-        })
+    const dataDrivenTest: TestOrchestrator<PokemonData> = TestBuilder.new<PokemonData>({ validateTypes: true, validateRules: true })
+        .addCase([ testCase1, testCase2 ])
+        .addCase(testCase3)
+        .addRule(defaultRules)
+        .setup(setupCallback)
+        .teardown(teardownCallback)
         .build();
 
     dataDrivenTest.start(run);
 });
 
 export default async function run(page: Page, testInfo: TestInfo, testCase: TestCase<PokemonData>): Promise<void> {
-    console.log("[Test] Start");
+    console.log(`[${testCase.id}] [${testInfo.testId}] Test started.`);
 
-    console.log(JSON.stringify(testCase, null, "    "));
+    await Utils.Timing.delay(Utils.Random.getRandomInteger(250, 1000));
 
-    console.log("[Test] Finish");
+    console.log(`[${testCase.id}] [${testInfo.testId}] Test finished.`);
 }

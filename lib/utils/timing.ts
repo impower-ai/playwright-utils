@@ -1,4 +1,4 @@
-import { ConditionError, TimeoutElapsedError } from "../Error";
+import { ConditionError, TimeoutElapsedError } from "../errors";
 import { Page, Locator, expect } from "@playwright/test";
 
 export type ConditionFunc = () => Promise<boolean>;
@@ -196,3 +196,18 @@ export const waitToAppearAndDisappear = async (locator: Locator): Promise<void> 
         throw new ConditionError(`Element did not appear and disappear as expected: ${errorMessage}`);
     }
 };
+
+export const Timing = {
+    createTimeoutPromise,
+    createSafeCondition,
+    delay,
+    waitFor,
+    waitForStableValue,
+    waitForAll,
+    waitForAny,
+    waitForUrlMatch,
+    waitForEither,
+    waitToAppearAndDisappear
+} as const;
+
+export default Timing;

@@ -1,29 +1,41 @@
-
 /**
  * @module Test
+ * Core test framework functionality for building and running data-driven tests.
  */
 
-// Test
-export { default as Test } from "./test";
-export type {
-    TestFunctionArgs,
-    TestFunction,
-    TestRunnerFunction,
-    PreparedTestArgs
-} from "./test";
+import TestOrchestrator, { TestConfigDefault } from "./test.orchestrator";
+import TestBuilder from './test.builder';
+import TestCase, { TestCaseValidationErrorTypes } from './test.case';
+import TestHook, { TestHookTypes } from './test.hook';
+import Rule from './rule';
+import RuleEngine from './rule.engine';
 
-// Test Case
-export { default as TestCase } from "./test.case";
-export type { TestCaseDefinition } from "./test.case";
+import { Test } from './test';
 
-// Test Hook
-export { default as TestHook } from "./test.hook";
-export type { TestHookType, TestHookCallback } from "./test.hook";
+export {
+    Test,
+    TestConfigDefault,
+    TestOrchestrator, 
+    TestBuilder,
+    TestCase,
+    TestCaseValidationErrorTypes,
+    TestHook,
+    TestHookTypes,
+    Rule,
+    RuleEngine
+};
 
-// Test Rule
-export { default as TestRule } from "./test.rule";
-export type { TestRuleCallback } from "./test.rule";
+export * from './types';
 
-// Test Builder
-export { DataDrivenTestBuilder } from "./test.builder";
-export type { TestBuilder } from "./test.builder";
+export const Testing = {
+    Test,
+    TestConfigDefault,
+    TestOrchestrator,
+    TestBuilder,
+    TestCase,
+    TestHook,
+    Rule,
+    RuleEngine
+} as const;
+
+export default Testing;

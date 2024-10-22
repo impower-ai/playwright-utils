@@ -5,3 +5,9 @@ export function formatTag(text: string): string {
         return index === 0 ? match.toLowerCase() : match.toUpperCase();
     });
 }
+
+export const Tag = {
+    formatTag
+} as const;
+
+export default Tag;

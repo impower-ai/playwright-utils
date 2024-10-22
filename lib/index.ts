@@ -1,53 +1,44 @@
 /**
  * @packageDocumentation
- * This module provides utilities for Playwright testing, supporting both namespace and individual imports.
- * 
- * @remarks
- * The library is organized into several modules:
- * - Core: Base classes for page objects and components
- * - Types: TypeScript interfaces for type safety
- * - Hooks: Reusable hooks for common testing scenarios
- * - Utils: Utility functions for timing, enum handling, etc.
- * 
- * @example
- * // Namespace import
- * import { Utils } from "playwright-testing-core";
- * Utils.Timing.waitFor(...);
- * 
- * @example
- * // Individual import
- * import { Timing } from "playwright-testing-core";
- * Timing.waitFor(...);
+ * A comprehensive testing utility framework built on top of Playwright.
+ * Provides utilities for building maintainable, data-driven test suites.
  */
 
-/**
- * Base module containing base classes for pages and components.
- * @namespace
- */
-export * from "./base";
+import { Utils } from './utils';
+import { Hooks } from './hooks';
+import { Testing } from './test';
+import { Types } from './types';
 
-/**
- * Types module containing TypeScript interfaces for type safety.
- * @namespace
- */
-export * from "./types";
+// Core - Base classes and interfaces
+export * from './core';
 
-/**
- * Types module containing TypeScript interfaces for type safety.
- * @namespace
- */
-export * from "./test";
+// Utils - Utility functions
+export * from './utils';
 
-/**
- * Hooks module containing reusable hooks for common testing scenarios.
- * @namespace
- */
-export * as Hooks from "./hooks";
+// Hooks - Global lifecycle hooks
+export * from './hooks';
 
-/**
- * Utils module containing utility functions for timing, enum handling, etc.
- * @namespace
- */
-export * as Utils from "./utils";
+// Test - Test framework functionality
+export * from './test';
 
-export * from "./Error";
+// Types - Common type definitions
+export * from './types';
+
+// Error definitions
+export * from './errors';
+
+// Namespace exports
+export {
+    Utils,
+    Hooks,
+    Testing,
+    Types
+};
+
+// Default export of all namespaces
+export default {
+    Utils,
+    Hooks,
+    Testing,
+    Types
+} as const;

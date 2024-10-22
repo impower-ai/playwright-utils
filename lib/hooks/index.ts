@@ -1,4 +1,14 @@
 /**
  * @module Hooks
+ * Global lifecycle hooks for test project setup and teardown.
  */
-export * as NodeServer from "./hooks.node-server";
+
+import * as NodeServer from './node-server';
+
+export { NodeServer };
+
+export const Hooks = {
+    NodeServer
+} as const;
+
+export default Hooks;

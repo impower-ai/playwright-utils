@@ -4,10 +4,6 @@ export default defineConfig({
 
     fullyParallel: true,
     workers: 10,
-    reporter: [
-        ["html"],
-        ["list"],
-    ],
     use: {
         trace: "retain-on-failure",
         actionTimeout: 10000,

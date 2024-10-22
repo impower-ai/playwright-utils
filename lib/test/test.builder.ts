@@ -1,85 +1,100 @@
-import { ZodObject, ZodRawShape } from "zod";
-import TestCase, { TestCaseDefinition } from "./test.case";
-import TestHook, { TestHookType, type TestHookCallback } from "./test.hook";
-import TestRule, { type TestRuleCallback } from "./test.rule";
-import Test from "./test";
+import TestCase from "./test.case";
+import RuleEngine from "./rule.engine";
+import type {
+	TestCaseCallback,
+	TestCaseDefinition,
+	TestConfig,
+	TestHookCallback,
+	RuleDefinition
+} from "./types";
+import TestOrchestrator, { TestConfigDefault } from "./test.orchestrator";
+import TestHook, { TestHookTypes } from "./test.hook";
+import Rule from "./rule";
 
-export interface TestBuilder<D, T extends TestCase<D>> {
-    testCases: T[];
-    testHooks: TestHook[];
-    testRules: TestRule<D>[];
-    schema: ZodObject<ZodRawShape>;
+export default class TestBuilder<T> {
 
-    addCase(testCase: T): this;
-    addCases(testCases: T[]): this;
-    addBeforeAllHook(name: string, callback: TestHookCallback): this;
-    addBeforeEachHook(name: string, callback: TestHookCallback): this;
-    addAfterAllHook(name: string, callback: TestHookCallback): this;
-    addAfterEachHook(name: string, callback: TestHookCallback): this;
-    addRule(rule: { name: string, check: TestRuleCallback<D> }): this;
-    addRules(rules: { name: string, check: TestRuleCallback<D> }[]): this;
-    build(): Test<D>;
-}
-
-export class DataDrivenTestBuilder<D, T extends TestCase<D>> implements TestBuilder<D, T> {
-
-	public testCases: T[] = [];
-	public testHooks: TestHook[] = [];
-	public testRules: TestRule<D>[] = [];
+	private _cases: TestCaseDefinition<T>[] = [];
+	private _hooks: TestHook[] = [];
+	private _rules: RuleDefinition<T>[] = [];
+	private _setupCallback?: TestCaseCallback<T>;
+    private _teardownCallback?: TestCaseCallback<T>;
 
 	public constructor(
-		public readonly schema: ZodObject<ZodRawShape>
+		private readonly config: TestConfig = TestConfigDefault
 	) {}
+
+	public static new<T>(config: TestConfig = TestConfigDefault): TestBuilder<T> {
+		return new this<T>(config);
+	}
 
 	// Add Test Cases
 
-	public addCase(testCase: T): this {
-		this.testCases.push(testCase);
+	public addCase(testCase: TestCaseDefinition<T>): this;
+	public addCase(testCases: TestCaseDefinition<T>[]): this;
+	public addCase(caseOrCases: TestCaseDefinition<T> | TestCaseDefinition<T>[]): this {
+		(Array.isArray(caseOrCases))
+			? caseOrCases.forEach((testCase) => this._cases.push(testCase))
+			: this._cases.push(caseOrCases);
 		return this;
 	}
 
-	public addCases(testCases: T[]): this {
-		testCases.forEach((testCase) => this.addCase(testCase));
+	// Add Test Case Hooks
+
+	public setup(callback: TestCaseCallback<T>): this {
+		this._setupCallback = callback;
+		return this;
+	}
+
+	public teardown(callback: TestCaseCallback<T>): this {
+		this._teardownCallback = callback;
 		return this;
 	}
 
 	// Add Hooks
 
 	public addBeforeAllHook(name: string, callback: TestHookCallback): this {
-		this.testHooks.push(new TestHook(name, TestHookType.BeforeAll, callback));
+		this._hooks.push(new TestHook(name, TestHookTypes.BeforeAll, callback));
 		return this;
 	}
 
 	public addBeforeEachHook(name: string, callback: TestHookCallback): this {
-		this.testHooks.push(new TestHook(name, TestHookType.BeforeEach, callback));
+		this._hooks.push(new TestHook(name, TestHookTypes.BeforeEach, callback));
 		return this;
 	}
 
 	public addAfterAllHook(name: string, callback: TestHookCallback): this {
-		this.testHooks.push(new TestHook(name, TestHookType.AfterAll, callback));
+		this._hooks.push(new TestHook(name, TestHookTypes.AfterAll, callback));
 		return this;
 	}
 
 	public addAfterEachHook(name: string, callback: TestHookCallback): this {
-		this.testHooks.push(new TestHook(name, TestHookType.AfterEach, callback));
+		this._hooks.push(new TestHook(name, TestHookTypes.AfterEach, callback));
 		return this;
 	}
 
-	// Add Rules
-
-	public addRule(rule: { name: string, check: TestRuleCallback<D> }): this {
-		this.testRules.push(new TestRule<D>(rule.name, rule.check));
+	public addRule(rule: RuleDefinition<T>): this;
+	public addRule(rules: RuleDefinition<T>[]): this;
+	public addRule(ruleOrRules: RuleDefinition<T> | RuleDefinition<T>[]): this {
+		(Array.isArray(ruleOrRules))
+			? ruleOrRules.forEach((rule) => this._rules.push(rule))
+			: this._rules.push(ruleOrRules);
 		return this;
 	}
 
-	public addRules(rules: { name: string, check: TestRuleCallback<D> }[]): this {
-		rules.forEach((rule) => this.addRule(rule));
-		return this;
-	}
+	public build(): TestOrchestrator<T> {
+		
+		// Build Test Rules
+		const testRules: Rule<T>[] = this._rules.map((definition) => new Rule<T>(definition));
+		const ruleEngine = new RuleEngine<T>(testRules);
 
-	// Build
-
-	public build(): Test<D> {
-		return new Test(this.schema, this.testCases, this.testRules, this.testHooks);
+		// Build Test Cases
+		const testCases: TestCase<T>[] = this._cases.map((definition) => {
+			if (this._setupCallback && definition.setup == undefined)
+				definition.setup = this._setupCallback;
+			if (this._teardownCallback && definition.teardown == undefined)
+				definition.teardown = this._teardownCallback;
+			return new TestCase<T>(definition);
+		});
+		return new TestOrchestrator(testCases, ruleEngine, this._hooks, this.config);
 	}
 }

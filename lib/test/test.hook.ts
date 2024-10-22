@@ -1,18 +1,17 @@
+import { TestHookCallback } from "./types";
 
-export enum TestHookType {
+export enum TestHookTypes {
 	BeforeEach,
 	BeforeAll,
 	AfterEach,
 	AfterAll
 }
 
-export type TestHookCallback = () => Promise<void> | void;
-
 export default class TestHook {
 
 	public constructor(
 		public readonly name: string,
-		public readonly type: TestHookType,
+		public readonly type: TestHookTypes,
 		public readonly callback: TestHookCallback
 	) {}
 }
