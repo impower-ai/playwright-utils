@@ -11,14 +11,17 @@ import { Testing } from './test';
 // Core - Base classes and interfaces
 export * from './core';
 
+// Test - Test framework functionality
+export * from './test';
+
+// Config - Config classes and helpers
+export * from './config';
+
 // Utils - Utility functions
 export * from './utils';
 
 // Hooks - Global lifecycle hooks
 export * from './hooks';
-
-// Test - Test framework functionality
-export * from './test';
 
 // Types - Common type definitions
 export * from './types';
