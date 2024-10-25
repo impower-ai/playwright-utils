@@ -8,8 +8,9 @@ import Enum from './enum';
 import Tag from './tag';
 import Validate from './validate';
 import Random from './random';
+import File from './file';
 
-export { Timing, Enum, Tag, Validate, Random };
+export { Timing, Enum, Tag, Validate, Random, File };
 
 export type { TimingOptions, ConditionFunc } from './timing';
 
@@ -18,7 +19,8 @@ export const Utils = {
     Enum,
     Tag,
     Validate,
-    Random
+    Random,
+    File
 } as const;
 
 export default Utils;
